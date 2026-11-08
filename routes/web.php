@@ -1,7 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PublicController,AuthController,ResourceController};
-Route::get('/',[PublicController::class,'index'])->name('home');
+Route::get('/',[\App\Http\Controllers\MonitoringController::class,'index'])->name('home');
+Route::get('/api/seguimiento',[\App\Http\Controllers\MonitoringController::class,'data'])->middleware('throttle:30,1');
+Route::get('/practica',[PublicController::class,'index']);
 Route::get('/alertas/{alert}',[PublicController::class,'alert']);
 Route::view('/privacidad','privacy');
 Route::middleware('guest')->group(function(){
