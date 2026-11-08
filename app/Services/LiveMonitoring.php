@@ -8,7 +8,7 @@ class LiveMonitoring {
  public function read(string $kind,string $place='arequipa'):array {
   $key='live-v1-'.$kind.'-'.$place.($kind==='warnings'?'-'.now()->toDateString():'');
   return Cache::remember($key,300,function()use($key,$kind,$place){
-   try {$data=$kind==='weather'?$this->weather($place):$this->warnings();$result=['status'=>'ok','checked_at'=>now()->toIso8601String(),'data'=>$data];Cache::put($key.'-last',$result,now()->addDay());return $result;}
+   try {$data=match($kind){'weather'=>$this->weather($place),'warnings'=>$this->warnings(),'impacts'=>app(AffectedAreas::class)->points(),'reports'=>app(AffectedAreas::class)->reports(),default=>throw new RuntimeException('Fuente inválida')};$result=['status'=>'ok','checked_at'=>now()->toIso8601String(),'data'=>$data];Cache::put($key.'-last',$result,now()->addDay());return $result;}
    catch(\Throwable $e){$last=Cache::get($key.'-last');return ['status'=>$last?'stale':'unavailable','checked_at'=>$last['checked_at']??null,'data'=>$last['data']??null,'message'=>'No se pudo verificar la fuente. No interpretar la falta de datos como ausencia de peligro.'];}
   });
  }

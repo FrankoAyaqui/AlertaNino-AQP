@@ -35,7 +35,7 @@ No sobrescribir una configuración existente. El comando de usuario pide nombre 
 - ENFEN: https://enfen.imarpe.gob.pe/download/comunicado-oficial-enfen-n-19-2026/ . Perspectivas por región, distintas del pronóstico puntual.
 - Leaflet 1.9.4 (BSD-2-Clause): https://leafletjs.com/ ; carga mediante CDN. Mapa base © OpenStreetMap contributors: https://www.openstreetmap.org/copyright ; política: https://operations.osmfoundation.org/policies/tiles/ . No descarga masiva.
 
-Si CDN o mapa base fallan, queda la lista textual. Las fechas y disponibilidad dependen de los proveedores. No se ha integrado INDECI como fuente actual: el servicio probado devolvió datos antiguos. IGP no está integrado en esta versión.
+Si CDN o mapa base fallan, queda la lista textual. Las fechas y disponibilidad dependen de los proveedores. INDECI está integrado en la sección de afectaciones: el catálogo cartográfico se etiqueta por fecha y se complementa con el listado de reportes; no se presenta como detección instantánea. IGP no está integrado en esta versión.
 
 ## Pruebas y seguridad
 
@@ -43,7 +43,7 @@ Si CDN o mapa base fallan, queda la lista textual. Las fechas y disponibilidad d
 php artisan test --compact
 ```
 
-Revisión: 16 pruebas y 117 comprobaciones, además de consultas reales desde PHP y navegador Edge a 1365 y 390 px sin errores JavaScript. Autorización, hash, cuatro CRUD, CSRF, XSS, filtros, caché ante fallos, rechazo de clima antiguo y exclusión de avisos sin fecha o de otras regiones. Las URLs externas son fijas y el cliente no puede indicar servidores arbitrarios. El texto externo se inserta mediante textContent.
+Revisión: 20 pruebas y 132 comprobaciones, además de consultas reales desde PHP y navegador Edge a 1365 y 390 px sin errores JavaScript. Autorización, hash, cuatro CRUD, CSRF, XSS, filtros, caché ante fallos, rechazo de clima antiguo y exclusión de avisos sin fecha o de otras regiones. Las URLs externas son fijas y el cliente no puede indicar servidores arbitrarios. El texto externo se inserta mediante textContent.
 
 Consulta `/api/seguimiento?source=weather&place=arequipa` o `source=warnings`. Límite 30 peticiones/minuto. La configuración, claves, bases, vendor y node_modules no se incluyen en Git ni ZIP. `.env.example` es solo una plantilla sin secretos. Composer instala las dependencias al ejecutar.
 
@@ -52,3 +52,19 @@ Consulta `/api/seguimiento?source=weather&place=arequipa` o `source=warnings`. L
 Ver docs/ENTREGA_GIT.md. La base e integración se prepararon con asistencia de Codex; no constituyen aportes individuales de los estudiantes. Deben completar entrevistas, consentimientos, evaluación, acuerdos y commits propios. Las licencias del backend se conservan en docs/LICENCIAS_DEPENDENCIAS.json y docs/LARAVEL_LICENSE.md; el código específico mantiene pendiente la decisión de licencia del equipo.
 
 El PDF corregido incorpora una actualización técnica inicial que prevalece sobre el alcance anterior. Conserva las guías académicas pendientes. No se generó un video nuevo.
+
+## Zonas con afectaciones reportadas (08/11/2026)
+
+Sección `/#zonas-afectadas`. Dos consultas independientes, con caché de 5 minutos:
+- `source=impacts`: SINPAD / INDECI, Arequipa, lluvias intensas, inundación, huaico, deslizamiento, aluvión y sequía. Últimos 300 eventos del servicio, ordenados por fecha e identificador. Solo muestra registros con al menos una cifra positiva de personas o viviendas afectadas/dañadas. Conserva valores desconocidos como «Sin dato». Descarta duplicados, fechas futuras y otras regiones; las coordenadas inválidas no se dibujan, pero el registro queda en la lista.
+- `source=reports`: primera página del listado oficial filtrado por Arequipa y lluvias intensas. Reconoce reportes preliminares, complementarios e informes de emergencia; excluye peligro inminente. Extrae fecha del título, sin usar la fecha del enlace antiguo como fecha de actualización. No descarga ni interpreta automáticamente las tablas de daños de los PDF.
+
+El usuario filtra el mapa por últimos 30 días (predeterminado), 12 meses o historial, y por distrito. Los puntos son ubicaciones reportadas, no polígonos de daños. No se deduce causalidad de El Niño ni continuidad del evento. La falta de registros recientes no significa ausencia de afectaciones. Ante fallo se indica el estado y no se dibuja la respuesta antigua como actual. Lista accesible aunque falle Leaflet.
+
+Prueba real: 162 eventos con daños entre los 300 registros consultados; última fecha del catálogo 22/01/2024. Tres reportes en el listado consultado: Ocoña (27/09/2026), Caravelí y Mariscal Cáceres (23/09/2026). Estos resultados describen esa consulta, no todo Arequipa ni daños activos hoy. El proveedor limita la actualidad y cobertura. Las fuentes se vuelven a consultar automáticamente: no son fixtures incluidos en el código.
+
+Verificación: 20 pruebas / 132 comprobaciones; Edge, filtro histórico/distrito, puntos y reportes reales; móvil 390 px sin desbordamiento y sin errores JavaScript. Solo se amplió la sección de afectaciones. Sin notificaciones, sin cambios en el PDF ni en ENFEN durante esta ampliación.
+
+Fuentes:
+- https://geosinpad.indeci.gob.pe/indeci/rest/services/Emergencias/EMERGENCIAS_SINPAD/MapServer/0
+- https://portal.indeci.gob.pe/emergencias/?title=AREQUIPA&tipo_alerta=lluvias-intensas
