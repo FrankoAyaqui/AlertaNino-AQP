@@ -76,3 +76,7 @@ Las dependencias conservan sus licencias; ver docs/LICENCIAS_DEPENDENCIAS.json y
 - `.env.example` es una plantilla sin claves ni credenciales; sí se entrega.
 - `vendor` contiene las librerías de Laravel instaladas por Composer. Se necesita para ejecutar la aplicación, pero se excluye de la entrega; se reconstruye con `composer install` y `composer.lock`.
 - Los scripts Python usados para preparar documentos o empaquetar esta entrega no forman parte de la aplicación ni se requieren para instalarla.
+
+## Zonas afectadas
+
+El inicio incluye un resumen por distrito de todos los avisos de demostración publicados y vigentes que coinciden con los filtros, con fecha, nivel y referencia. No confirma afectaciones reales ni atribuye eventos a El Niño. La conexión con reportes oficiales sigue pendiente.
