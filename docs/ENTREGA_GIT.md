@@ -1,5 +1,9 @@
 # Repositorio y colaboración real
 
+Repositorio verificado: https://github.com/FrankoAyaqui/AlertaNino-AQP
+
+Rama inicial: `codex/entrega`. Visibilidad: privada.
+
 La base académica fue preparada con asistencia de Codex. Su commit inicial describe esa procedencia y no representa contribuciones individuales de los tres integrantes.
 
 ## Archivos que se entregan

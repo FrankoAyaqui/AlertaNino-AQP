@@ -1,5 +1,7 @@
 # AlertaNiño AQP
 
+Repositorio: https://github.com/FrankoAyaqui/AlertaNino-AQP (privado; el docente y los integrantes necesitan acceso).
+
 Prototipo académico local para Programación Web, Universidad Continental. Creado con asistencia de Codex el 7 de noviembre de 2026. El equipo debe revisar y comprender el código, completar entrevistas y documentar aportes propios. No constituye un sistema oficial de alerta temprana.
 
 ## Funciones
@@ -61,7 +63,7 @@ El registro no acepta role del cliente. Eloquent parametriza consultas; Blade es
 
 ## Colaboración y entrega
 
-El ZIP excluye vendor, node_modules, .env, bases, caches, logs y .git. Incluye composer.lock para reproducir dependencias. Cada integrante debe usar su identidad real y realizar cambios comprensibles con evidencia de prueba. El historial inicial se identifica como preparación asistida por Codex. No acredita aportes individuales de los estudiantes. Consulta docs/ENTREGA_GIT.md para registrar cambios reales y comprobar la entrega. Agregar al informe la URL una vez publicada y verificada. Los videos de entrevistas no pertenecen al repositorio de código.
+El ZIP excluye vendor, node_modules, .env, bases, caches, logs y .git. Incluye composer.lock para reproducir dependencias. Cada integrante debe usar su identidad real y realizar cambios comprensibles con evidencia de prueba. El historial inicial se identifica como preparación asistida por Codex. No acredita aportes individuales de los estudiantes. Consulta docs/ENTREGA_GIT.md para registrar cambios reales y comprobar la entrega. La URL fue publicada y verificada el 7 de noviembre de 2026. Los videos de entrevistas no pertenecen al repositorio de código.
 
 ## Licencias y asistencia
 
