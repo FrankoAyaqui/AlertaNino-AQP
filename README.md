@@ -68,3 +68,13 @@ Verificación: 20 pruebas / 132 comprobaciones; Edge, filtro histórico/distrito
 Fuentes:
 - https://geosinpad.indeci.gob.pe/indeci/rest/services/Emergencias/EMERGENCIAS_SINPAD/MapServer/0
 - https://portal.indeci.gob.pe/emergencias/?title=AREQUIPA&tipo_alerta=lluvias-intensas
+
+## Mapa interactivo ampliado el 9 de noviembre de 2026
+
+Se añadieron filtros de hoy y 7 días, filtro por fenómeno, botón de actualización, cuenta regresiva, pausa de actualización automática, ajuste a todos los puntos, pantalla completa y selección desde las tarjetas mediante «Ver en mapa». La actualización conserva el encuadre. Los marcadores diferencian fechas recientes e históricas por color, sin representar gravedad. Los puntos y fichas enlazan la fuente y no atribuyen automáticamente causalidad a El Niño.
+
+La consulta se repite cada 5 minutos con la página visible y conexión. Al regresar a la página, consulta si venció el intervalo; al recuperar Internet, vuelve a consultar si la actualización automática está activada. «Actualizar consulta» respeta la caché de 5 minutos del servidor. No equivale a detección instantánea ni modifica la fecha oficial. Las fuentes cartográficas alternativas de INDECI comprobadas tampoco aportaron registros más recientes de Arequipa.
+
+Validación del 09/11: prueba aislada en Edge con datos de ensayo identificados: puntos, historial, filtro de fenómeno, ficha, conservación de encuadre, actualización, pausa, limpieza ante fallo, recuperación, filtro de hoy y móvil; sin errores JavaScript. Script: `tests/browser/affected-areas.cjs`. Para reproducirlo se necesita Node y Playwright disponibles en el entorno de pruebas (o variable PLAYWRIGHT_MODULE con su ubicación); ejecutar `node tests/browser/affected-areas.cjs`. Esto no añade Node como requisito de ejecución de la aplicación. La prueba carga Leaflet desde su CDN y no sustituye una prueba contra Laravel.
+
+Windows bloqueó php.exe mediante Control de aplicaciones y no había servidor abierto. Por ello no se repitió la suite PHP ni la prueba integrada el 09/11. Las 20 pruebas/132 comprobaciones registradas arriba corresponden al 08/11. El backend no cambió en esta ampliación. Antes de presentar, ejecutar la prueba integrada en un equipo donde PHP esté autorizado. No se añadieron notificaciones.
