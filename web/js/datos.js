@@ -27,15 +27,19 @@ export const DISTRITOS = [
 export const RIO_CHILI = { lat: -16.40, lon: -71.54 };
 
 // Niveles OFICIALES del aviso de SENAMHI por lluvias (24 h). El texto se
-// muestra tal como lo publica SENAMHI; el color sigue su convención
-// (verde, amarillo, naranja, rojo) y siempre va con el número.
+// muestra tal como lo publica SENAMHI. Los colores copian la leyenda oficial
+// de la capa (Nivel 1 sin color, 2 amarillo, 3 naranja, 4 rojo) y siempre
+// van acompañados del número.
 export const NIVELES_OFICIALES = {
   0: { nombre: "Sin aviso", icono: "–", color: "" },
-  1: { nombre: "Nivel 1", icono: "1", color: "0" },
+  1: { nombre: "Nivel 1", icono: "1", color: "" },
   2: { nombre: "Nivel 2", icono: "2", color: "1" },
   3: { nombre: "Nivel 3", icono: "3", color: "2" },
   4: { nombre: "Nivel 4", icono: "4", color: "3" },
 };
+
+// Capa oficial de SENAMHI que el navegador dibuja directamente en el mapa.
+export const WMS_SENAMHI = "https://idesep.senamhi.gob.pe/geoserver/ows";
 
 // Orientación general por nivel oficial (no reemplaza las indicaciones de las autoridades).
 export const ACCIONES_OFICIALES = {

@@ -4,7 +4,7 @@
 // (consultado en vivo desde el navegador). Referencia: pronóstico de Open-Meteo
 // y caudal GloFAS del río Chili, consultados en vivo cada 15 minutos.
 
-import { DISTRITOS, RIO_CHILI, NIVELES, NIVELES_OFICIALES, ACCIONES_OFICIALES, cielo } from "./datos.js";
+import { DISTRITOS, RIO_CHILI, NIVELES, NIVELES_OFICIALES, ACCIONES_OFICIALES, WMS_SENAMHI, cielo } from "./datos.js";
 import { barras, linea } from "./graficos.js";
 
 const CADA_MS = 15 * 60 * 1000;            // consulta cada 15 min
@@ -207,7 +207,7 @@ function renderTarjeta() {
     $("#estado-titulo").textContent = "No se pudo leer el aviso oficial de SENAMHI";
     $("#estado-detalle").textContent = "Revisa tu conexión o consulta directamente a SENAMHI. La falta de datos no significa que no haya riesgo.";
   } else {
-    tarjeta.dataset.nivel = n ? n - 1 : "cargando";
+    tarjeta.dataset.nivel = NIVELES_OFICIALES[n].color || "cargando";
     $("#insignia").replaceWith(Object.assign(insigniaOficial(n), { id: "insignia" }));
     $("#estado-titulo").textContent = aviso
       ? `Aviso de SENAMHI por lluvias: ${aviso.texto} en ${d.nombre}`
@@ -383,6 +383,11 @@ function iniciarMapa() {
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(mapa);
+  // Zonas oficiales del aviso por lluvias, servidas en vivo por SENAMHI.
+  L.tileLayer.wms(WMS_SENAMHI, {
+    layers: "g_prono_pp_24h:view_aviso24h", format: "image/png", transparent: true, opacity: 0.5,
+    attribution: 'Aviso por lluvias © <a href="https://idesep.senamhi.gob.pe/portalidesep/">SENAMHI</a>',
+  }).addTo(mapa);
   estado.mapa = mapa;
   DISTRITOS.forEach((d) => {
     const icono = L.divIcon({ className: "", html: `<div class="marcador" data-id="${d.id}">${d.abrev}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] });
@@ -554,7 +559,9 @@ async function renderAvisos() {
 function renderEstadoConexion() {
   const caja = $("#estado-conexion");
   const t = $("#estado-texto");
-  const gen = estado.indicadores?.generado ? Date.parse(estado.indicadores.generado) : 0;
+  // La antigüedad oficial se mide por la última lectura EXITOSA de SENAMHI.
+  const consultado = estado.indicadores?.senamhi?.consultado;
+  const gen = consultado ? Date.parse(consultado) : 0;
   const oficialViejo = !gen || Date.now() - gen > OFICIAL_VIEJO_MS;
   if (!estado.ultimoExito && !gen) { caja.dataset.estado = "error"; t.textContent = "Sin datos en vivo"; return; }
   if (oficialViejo) {
