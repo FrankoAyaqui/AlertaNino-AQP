@@ -18,6 +18,12 @@ Proyecto de impacto social del curso de Programación Web, Universidad Continent
 
 No hay datos simulados: todo lo que muestra la web proviene de estas fuentes o de los datos de referencia de la tabla siguiente.
 
+> **Límite conocido:** los servidores de SENAMHI no responden a GitHub Actions (que corre en EE. UU.). El mapa muestra la capa
+> oficial de SENAMHI en vivo desde el navegador de cada visitante, pero el nivel por distrito, los avisos y el estado de ENFEN se
+> actualizan cuando se ejecuta la lectura desde Perú:
+> `powershell -ExecutionPolicy Bypass -File scripts\publicar_datos_oficiales.ps1`.
+> La web muestra la hora de la última lectura y avisa «no verificado» cuando tiene más de 2 horas.
+
 ## Qué hace
 
 | Función | Cómo funciona |

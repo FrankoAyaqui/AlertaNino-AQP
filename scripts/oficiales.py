@@ -33,7 +33,7 @@ VISOR_SENAMHI = "https://idesep.senamhi.gob.pe/portalidesep/"
 DATOS_JS = Path(__file__).resolve().parent.parent / "web" / "js" / "datos.js"
 
 
-def _bajar(url: str, timeout: int = 90) -> bytes:
+def _bajar(url: str, timeout: int = 30) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR, "Accept-Language": "es-PE,es"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read()
@@ -42,7 +42,7 @@ def _bajar(url: str, timeout: int = 90) -> bytes:
 def _wfs(capa: str, **extra) -> dict:
     params = {"service": "WFS", "version": "2.0.0", "request": "GetFeature",
               "typeNames": capa, "outputFormat": "application/json", **extra}
-    datos = json.loads(_bajar(WFS + "?" + urllib.parse.urlencode(params), timeout=120))
+    datos = json.loads(_bajar(WFS + "?" + urllib.parse.urlencode(params), timeout=45))
     if datos.get("type") != "FeatureCollection" or not isinstance(datos.get("features"), list):
         raise ValueError(f"respuesta inesperada de {capa}")
     return datos
