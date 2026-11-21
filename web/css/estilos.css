@@ -164,7 +164,7 @@ main { padding-block: 24px 48px; }
 .tarjeta-estado__acciones ul { margin: 0; padding-left: 20px; }
 .tarjeta-estado__acciones li { margin-bottom: 6px; }
 
-.insignia { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; font-weight: 700; background: var(--superficie-2); }
+.insignia { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; font-weight: 700; background: var(--superficie-2); }
 .insignia__icono { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--eje); color: var(--sobre-estado); font-size: .95rem; }
 .insignia[data-nivel="0"] { background: var(--bien-fondo); } .insignia[data-nivel="0"] .insignia__icono { background: var(--bien); }
 .insignia[data-nivel="1"] { background: var(--atencion-fondo); } .insignia[data-nivel="1"] .insignia__icono { background: var(--atencion); color: #0b0b0b; }
