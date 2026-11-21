@@ -34,17 +34,11 @@
 
   <div class="aviso-legal">
     <div class="contenedor">
-      <strong>Herramienta académica de consulta.</strong> Los niveles se calculan con pronósticos públicos y
-      <em>no son avisos oficiales</em>. Verifica siempre en <a href="https://www.gob.pe/9323-consultar-los-avisos-meteorologicos-mas-recientes-en-peru" target="_blank" rel="noopener">SENAMHI</a>
-      e <a href="https://portal.indeci.gob.pe/" target="_blank" rel="noopener">INDECI</a>.
+      <strong>Datos oficiales en tiempo real</strong> de <a href="https://idesep.senamhi.gob.pe/portalidesep/" target="_blank" rel="noopener">SENAMHI</a>,
+      <a href="https://www.senamhi.gob.pe/?p=fenomeno-el-nino" target="_blank" rel="noopener">ENFEN</a> e
+      <a href="https://portal.indeci.gob.pe/emergencias/" target="_blank" rel="noopener">INDECI</a>, reunidos por un proyecto académico.
+      Ante una emergencia sigue siempre las indicaciones de las autoridades.
       Emergencias: <a href="tel:115">115</a> Defensa Civil · <a href="tel:116">116</a> Bomberos · <a href="tel:105">105</a> Policía · <a href="tel:106">106</a> SAMU.
-    </div>
-  </div>
-
-  <div class="aviso-demo" id="aviso-demo" hidden>
-    <div class="contenedor">
-      <strong>MODO DEMOSTRACIÓN.</strong> La lluvia de mañana y el caudal del río están simulados para mostrar cómo funcionan las alertas.
-      Los índices de El Niño sí son reales. <a href="./">Volver a los datos reales</a>.
     </div>
   </div>
 
@@ -80,7 +74,8 @@
       <div class="rejilla-3">
         <article class="panel" aria-labelledby="t-nino">
           <h3 id="t-nino">El Niño hoy</h3>
-          <p class="panel__sub">Mar frente a la costa norte del Perú (región Niño 1+2)</p>
+          <p class="estado-enfen" id="enfen-estado">Consultando ENFEN…</p>
+          <p class="panel__sub">Temperatura del mar frente a la costa norte (región Niño 1+2), NOAA</p>
           <div class="heroe">
             <span class="heroe__valor" id="nino-anom">—</span>
             <span class="heroe__unidad">°C sobre lo normal</span>
@@ -126,13 +121,13 @@
         <div id="mapa" class="mapa" aria-label="Mapa de Arequipa con el nivel de cada distrito. La misma información está en la tabla."></div>
         <div class="tabla-envoltura">
           <table class="tabla" id="tabla-distritos">
-            <caption>Nivel por distrito (próximas 72 h)</caption>
-            <thead><tr><th scope="col">Distrito</th><th scope="col">Nivel</th><th scope="col" class="num">Lluvia máx. día</th><th scope="col" class="num">Prob.</th></tr></thead>
+            <caption>Aviso oficial de SENAMHI por distrito y pronóstico de referencia</caption>
+            <thead><tr><th scope="col">Distrito</th><th scope="col">SENAMHI hoy</th><th scope="col">Modelo 72 h</th><th scope="col" class="num">Lluvia máx.</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
       </div>
-      <p class="nota">Los puntos marcan una referencia aproximada de cada distrito; no son límites oficiales ni zonas de riesgo. Una zona sin color de alerta no significa «zona segura».</p>
+      <p class="nota">El color de cada punto es el nivel del aviso por lluvias de SENAMHI para hoy en ese lugar. Los puntos son una referencia de cada distrito, no límites oficiales. Una zona sin aviso no significa «zona segura».</p>
     </section>
 
     <!-- 4. Pronóstico 7 días -->
@@ -152,9 +147,27 @@
       </div>
     </section>
 
-    <!-- 5. Avisos y fuentes oficiales -->
+    <!-- 5. Avisos y reportes oficiales -->
     <section class="bloque" aria-labelledby="t-avisos">
-      <h2 id="t-avisos" class="bloque__titulo">Avisos oficiales verificados</h2>
+      <h2 id="t-avisos" class="bloque__titulo">Avisos y reportes oficiales</h2>
+      <div class="rejilla-2">
+        <article class="panel oficial" aria-labelledby="t-enfen">
+          <h3 id="t-enfen">ENFEN · Comunicado oficial</h3>
+          <div id="enfen"></div>
+        </article>
+        <article class="panel oficial" aria-labelledby="t-senamhi">
+          <h3 id="t-senamhi">SENAMHI · Avisos para Arequipa</h3>
+          <div id="senamhi"></div>
+        </article>
+        <article class="panel oficial" aria-labelledby="t-quebradas">
+          <h3 id="t-quebradas">SENAMHI · Activación de quebradas (Arequipa)</h3>
+          <div id="quebradas"></div>
+        </article>
+        <article class="panel oficial" aria-labelledby="t-sinpad">
+          <h3 id="t-sinpad">INDECI · Emergencias registradas (provincia de Arequipa)</h3>
+          <div id="sinpad"><p class="nota">Consultando SINPAD…</p></div>
+        </article>
+      </div>
       <div id="avisos" class="avisos"></div>
       <div class="fuentes">
         <a class="fuente" href="https://www.gob.pe/9323-consultar-los-avisos-meteorologicos-mas-recientes-en-peru" target="_blank" rel="noopener"><strong>SENAMHI</strong><span>Avisos meteorológicos vigentes</span></a>
@@ -169,8 +182,8 @@
       <h2 id="t-mis-alertas" class="bloque__titulo">Alertas en este dispositivo</h2>
       <div class="panel ajustes">
         <div class="ajuste">
-          <label class="interruptor"><input type="checkbox" id="opt-notificar"><span>Avisarme cuando suba el nivel de mi distrito</span></label>
-          <p class="nota" id="notif-estado">Funciona mientras esta página esté abierta (puede estar en segundo plano). La web revisa los datos cada 15 minutos.</p>
+          <label class="interruptor"><input type="checkbox" id="opt-notificar"><span>Avisarme cuando SENAMHI suba el nivel de mi distrito o ENFEN cambie su estado</span></label>
+          <p class="nota" id="notif-estado">Funciona mientras esta página esté abierta (puede estar en segundo plano). La web revisa los datos oficiales cada 15 minutos.</p>
         </div>
         <div class="ajuste">
           <label class="interruptor"><input type="checkbox" id="opt-sonido"><span>Sonar al recibir un aviso</span></label>

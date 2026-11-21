@@ -26,37 +26,54 @@ export const DISTRITOS = [
 
 export const RIO_CHILI = { lat: -16.40, lon: -71.54 };
 
-// Niveles propios de la app. Son etiquetas internas: no equivalen a los
-// niveles amarillo/naranja/rojo de SENAMHI.
+// Niveles OFICIALES del aviso de SENAMHI por lluvias (24 h). El texto se
+// muestra tal como lo publica SENAMHI; el color sigue su convención
+// (verde, amarillo, naranja, rojo) y siempre va con el número.
+export const NIVELES_OFICIALES = {
+  0: { nombre: "Sin aviso", icono: "–", color: "" },
+  1: { nombre: "Nivel 1", icono: "1", color: "0" },
+  2: { nombre: "Nivel 2", icono: "2", color: "1" },
+  3: { nombre: "Nivel 3", icono: "3", color: "2" },
+  4: { nombre: "Nivel 4", icono: "4", color: "3" },
+};
+
+// Orientación general por nivel oficial (no reemplaza las indicaciones de las autoridades).
+export const ACCIONES_OFICIALES = {
+  0: [
+    "SENAMHI no incluye tu distrito en el aviso por lluvias de hoy. Esto no significa que no haya riesgo.",
+    "Revisa techos, canaletas y tu mochila de emergencia.",
+    "Consulta los avisos de SENAMHI e INDECI antes de salir si el cielo cambia.",
+  ],
+  1: [
+    "Mantente informado por los canales oficiales de SENAMHI y Defensa Civil.",
+    "No dejes objetos ni desmonte en torrenteras y cauces secos.",
+    "Ten lista tu mochila de emergencia y el celular cargado.",
+  ],
+  2: [
+    "Evita cruzar torrenteras y cauces secos, aunque parezcan sin agua.",
+    "Planifica tus traslados y aléjate de laderas inestables.",
+    "Sigue la radio local y las indicaciones de Defensa Civil.",
+  ],
+  3: [
+    "Aléjate de torrenteras, quebradas y de la orilla del río Chili.",
+    "Ten a mano tu mochila de emergencia y acuerda un punto de encuentro con tu familia.",
+    "Atiende las instrucciones de las autoridades. Emergencias: 115.",
+  ],
+  4: [
+    "Peligro alto: no te acerques a torrenteras, quebradas ni al río Chili.",
+    "Si las autoridades lo indican, dirígete a una zona segura de inmediato.",
+    "Emergencias: 115 Defensa Civil · 116 Bomberos · 105 Policía.",
+  ],
+};
+
+// Niveles de REFERENCIA calculados con el pronóstico numérico (Open-Meteo).
+// No son avisos oficiales: complementan el aviso de SENAMHI.
 export const NIVELES = [
   { n: 0, nombre: "Sin señal relevante", corto: "Normal", icono: "✓" },
   { n: 1, nombre: "Atención", corto: "Atención", icono: "!" },
   { n: 2, nombre: "Alto", corto: "Alto", icono: "!!" },
   { n: 3, nombre: "Muy alto", corto: "Muy alto", icono: "!!!" },
 ];
-
-export const ACCIONES = {
-  0: [
-    "No se prevé lluvia fuera de lo habitual en tu distrito.",
-    "Es buen momento para revisar techos, canaletas y tu mochila de emergencia.",
-    "Consulta de vez en cuando: el pronóstico se actualiza cada hora.",
-  ],
-  1: [
-    "Se prevé lluvia por encima de lo habitual (más que 9 de cada 10 días lluviosos).",
-    "Evita dejar objetos o desmonte en torrenteras y cauces secos.",
-    "Revisa los avisos de SENAMHI para Arequipa.",
-  ],
-  2: [
-    "Lluvia fuerte prevista. Planifica tus traslados y evita cruzar torrenteras.",
-    "Ten a mano tu mochila de emergencia y cargado el celular.",
-    "Sigue la radio local y los canales oficiales de Defensa Civil.",
-  ],
-  3: [
-    "Lluvia muy fuerte prevista, entre las mayores del registro reciente.",
-    "Aléjate de torrenteras, quebradas y de la orilla del río Chili.",
-    "Si las autoridades lo indican, dirígete a una zona segura. Emergencias: 115.",
-  ],
-};
 
 const WMO = {
   0: "Despejado", 1: "Mayormente despejado", 2: "Parcialmente nublado", 3: "Nublado",

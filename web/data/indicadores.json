@@ -1,10 +1,226 @@
 {
- "generado": "2026-11-21T15:39:37-05:00",
+ "generado": "2026-11-21T15:57:48-05:00",
  "estado_fuentes": {
+  "senamhi": "actualizado",
+  "enfen": "actualizado",
   "oni": "actualizado",
   "semanal": "actualizado",
   "umbrales_lluvia": "vigente",
   "umbrales_rio": "vigente"
+ },
+ "senamhi": {
+  "consultado": "2026-11-21T15:57:48-05:00",
+  "visor": "https://idesep.senamhi.gob.pe/portalidesep/",
+  "por_distrito": {
+   "cercado": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "alto-selva-alegre": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "cayma": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "cerro-colorado": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "characato": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "chiguata": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "jacobo-hunter": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "jlbyr": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "mariano-melgar": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "miraflores": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "paucarpata": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "sabandia": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "sachaca": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "socabaya": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "tiabaya": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "uchumayo": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "yanahuara": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   },
+   "yura": {
+    "lluvia_24h": {
+     "nivel": 1,
+     "texto": "Nivel 1",
+     "fecha": "2026-11-21",
+     "descripcion": "Ante el pronóstico de lluvias es probable la activación de quebradas de magnitud moderada en las zonas identificadas o alrededor de las mismas, con posible afectación de la población bajo la influencia de las quebradas.",
+     "recomendacion": "Estar atentos a la información oficial y seguir las instrucciones de las autoridades competentes."
+    },
+    "avisos": []
+   }
+  },
+  "lluvia_24h": {
+   "capa": "g_prono_pp_24h:view_aviso24h",
+   "nombre": "Aviso por lluvias - pronóstico de 24 horas",
+   "fechas": [
+    "2026-11-21"
+   ],
+   "zonas_en_peru": 10
+  },
+  "avisos_meteorologicos": {
+   "capa": "g_aviso:view_aviso",
+   "vigentes_en_peru": 0,
+   "que_afectan_arequipa": []
+  },
+  "quebradas_arequipa": {
+   "capa": "g_acti_quebrada:view_av_activ_qdra",
+   "lista": [],
+   "total": 0
+  }
+ },
+ "enfen": {
+  "numero": "20-2026",
+  "fecha": "2026-11-13",
+  "estado": "Alerta de El Niño Costero",
+  "titular": "EL NIÑO COSTERO CONTINUARÍA HASTA INICIOS DE INVIERNO DE 2027",
+  "resumen": "El calentamiento del mar se mantiene en gran parte del Pacífico tropical, alcanzando su máxima intensidad en la superficie frente a la costa peruana. El Niño costero (región Niño 1+2), iniciado en marzo de 2026, se mantendría con una magnitud extraordinaria hasta febrero de 2027 debilitándose progresivamente hasta julio de 2027. Asimismo, El Niño en el Pacífico central (región Niño 3.4) continuaría con una magnitud muy fuerte hasta febrero de 2027, iniciando posteriormente un declive que llevaría a una condición neutra en junio de 2027.",
+  "lluvias": "Las precipitaciones, de noviembre 2026 a enero 2027 continuarían por encima de lo normal en la costa norte, sierra norte occidental, costa central y sierra central occidental, incrementándose la ocurrencia de los episodios de moderada a fuerte intensidad, en particular en la costa norte. Por el contrario, en la sierra sur oriental, sierra centro oriental y la Amazonía, las precipitaciones serían de normales a inferiores; en la región del Titicaca, se esperan precipitaciones inferiores a lo normal.",
+  "pdf": "https://www.senamhi.gob.pe/load/file/02204SENA-226.pdf",
+  "pagina": "https://www.senamhi.gob.pe/?p=fenomeno-el-nino"
  },
  "oni": {
   "ultimo": {

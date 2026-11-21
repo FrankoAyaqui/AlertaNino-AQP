@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Actualiza web/data/indicadores.json con datos reales.
 
-Fuentes (todas públicas y sin clave):
+Fuentes oficiales (ver oficiales.py): SENAMHI (avisos por lluvias de 24 h,
+avisos meteorológicos y activación de quebradas) y ENFEN (comunicado oficial).
+
+Fuentes de referencia (todas públicas y sin clave):
   * NOAA CPC - Índice Oceánico El Niño (ONI), mensual por trimestres.
   * NOAA CPC - Temperatura semanal del mar (OISST) en las regiones Niño 1+2 y 3.4.
   * Open-Meteo Historical Forecast API - lluvia diaria/horaria del mismo modelo
@@ -26,6 +29,9 @@ import re
 import sys
 import urllib.request
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import oficiales  # noqa: E402  (fuentes oficiales: SENAMHI y ENFEN)
 
 RAIZ = Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "web" / "data" / "indicadores.json"
@@ -230,7 +236,10 @@ def main() -> int:
             previo = {}
 
     salida = {"generado": ahora().isoformat(), "estado_fuentes": {}}
+    momento = ahora()
     tareas = {
+        "senamhi": (lambda: oficiales.senamhi(momento), False),
+        "enfen": (oficiales.enfen, False),
         "oni": (leer_oni, False),
         "semanal": (leer_semanal, False),
         "umbrales_lluvia": (umbrales_lluvia, True),

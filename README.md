@@ -1,25 +1,37 @@
 # AlertaNiño AQP
 
-Web de **monitoreo en tiempo real** de lluvias, caudal del río Chili y Fenómeno El Niño para los distritos de Arequipa.
+Web de **monitoreo en tiempo real con datos oficiales** de lluvias, Fenómeno El Niño y emergencias para los distritos de Arequipa.
 Proyecto de impacto social del curso de Programación Web, Universidad Continental.
 
-> Herramienta académica de consulta. Sus niveles **no son avisos oficiales**. Verifica siempre en SENAMHI, ENFEN e INDECI.
+> Reúne datos oficiales de SENAMHI, ENFEN e INDECI. Ante una emergencia sigue siempre las indicaciones de las autoridades.
 > Emergencias: 115 Defensa Civil · 116 Bomberos · 105 Policía · 106 SAMU.
+
+## Fuentes oficiales
+
+| Fuente | Dato | Cómo se lee |
+|---|---|---|
+| SENAMHI (IDESEP, WFS `g_prono_pp_24h:view_aviso24h`) | Aviso por lluvias de 24 h, Nivel 1 a 4, por zona | Cada 30 min en GitHub Actions; se cruza cada zona con el punto de cada distrito |
+| SENAMHI (WFS `g_aviso:view_aviso`) | Avisos meteorológicos nacionales vigentes | Cada 30 min |
+| SENAMHI (WFS `g_acti_quebrada:view_av_activ_qdra`) | Activación de quebradas en Arequipa | Cada 30 min |
+| ENFEN (Comunicado Oficial, PDF enlazado por SENAMHI) | Estado del sistema de alerta, titular y pronóstico de lluvias | Cada 30 min |
+| INDECI (GeoSINPAD) | Emergencias registradas en la provincia de Arequipa | En vivo desde el navegador |
+
+No hay datos simulados: todo lo que muestra la web proviene de estas fuentes o de los datos de referencia de la tabla siguiente.
 
 ## Qué hace
 
 | Función | Cómo funciona |
 |---|---|
-| Situación en mi distrito | Pronóstico de lluvia de 18 distritos (Open-Meteo) comparado con umbrales por percentiles. Niveles: Normal, Atención, Alto, Muy alto, siempre con icono y texto. |
+| Situación en mi distrito | Nivel oficial del aviso por lluvias de SENAMHI, con su descripción y recomendación textuales, más el estado de ENFEN y el pronóstico de referencia. |
+| Referencia numérica | Pronóstico de lluvia de 18 distritos (Open-Meteo) comparado con percentiles del mismo modelo; se rotula como referencia, no como aviso. |
 | Río Chili | Caudal diario modelado por GloFAS (60 días atrás + 30 de pronóstico) con umbrales P90 y P99 de 1991–2020. |
 | El Niño hoy | Anomalía semanal del mar en Niño 1+2 (frente a la costa norte del Perú), ICEN aproximado con las categorías de ENFEN y ONI de NOAA. |
 | Mapa | Leaflet + OpenStreetMap con el nivel de cada distrito, y una tabla con la misma información. |
 | Tiempo real | Consulta al abrir y cada 15 min. Si pasan 30 min sin datos nuevos, muestra «Actualización no verificada». Los índices oceánicos se regeneran cada 3 h con GitHub Actions. |
-| Alertas | Notificación del navegador (con permiso) y sonido opcional (3 tonos, con botón de prueba) cuando sube el nivel del distrito elegido. |
+| Alertas | Notificación del navegador (con permiso) y sonido opcional (3 tonos, con botón de prueba) cuando SENAMHI eleva el aviso del distrito elegido o ENFEN cambia su estado. |
 | Avisos oficiales | `web/data/avisos.json`: avisos copiados de fuentes oficiales, validados antes de publicar y ocultados al vencer. |
 | Accesibilidad | Texto ampliable (A−/A+), modo claro/oscuro, enlace para saltar al contenido, tablas como alternativa a mapa y gráficos, sin desbordamiento en móvil. |
 | Sin conexión | Service worker y caché local: si se cae la red, muestra los últimos datos con su hora. |
-| Modo demostración | `?demo=1` simula lluvia fuerte sobre los datos reales para presentar la app en temporada seca. Se rotula siempre como demostración. |
 
 ## Estructura
 
@@ -46,7 +58,7 @@ python scripts/actualizar_datos.py
 python -m http.server 8000 --directory web
 ```
 
-Abrir http://localhost:8000 (o http://localhost:8000/?demo=1 para el modo demostración).
+Abrir http://localhost:8000. El script necesita `pip install pypdf` para leer el comunicado de ENFEN; sin él, el resto de fuentes se actualiza igual.
 
 ## Publicar en GitHub Pages
 

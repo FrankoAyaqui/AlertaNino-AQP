@@ -1,7 +1,7 @@
 // Service worker: guarda la interfaz para abrirla sin conexión.
 // Los datos en vivo nunca se sirven desde aquí sin avisar: la app muestra la
 // hora del último dato y el estado «Actualización no verificada».
-const VERSION = "alertanino-v1";
+const VERSION = "alertanino-v2";
 const BASE = ["./", "index.html", "css/estilos.css", "js/app.js", "js/datos.js", "js/graficos.js", "img/icono.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {
