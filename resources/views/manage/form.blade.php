@@ -1,8 +1,0 @@
-@extends('layout')
-@section('content')<a href="/gestion/{{ $kind }}">← Volver al listado</a><section class="reading"><h1>{{ $record->exists?'Editar':'Crear' }} {{ $kind }}</h1><p>Todo contenido de esta instalación se muestra como demostración. Al publicar una alerta se crea un aviso en la bandeja de cada suscriptor del distrito.</p><form method="post" action="/gestion/{{ $kind }}{{ $record->exists?'/'.$record->id:'' }}">@csrf @if($record->exists)@method('PUT')@endif
-@foreach($fields as $key=>$label)<label>{{ $label }}
-@if($key==='zone_id')<select name="zone_id" required><option value="">Selecciona un distrito</option>@foreach($zones as $zone)<option value="{{ $zone->id }}" @selected(old($key,$record->$key)==$zone->id)>{{ $zone->name }}</option>@endforeach</select>
-@elseif(in_array($key,['level','status']))<select name="{{ $key }}">@foreach($key==='level'?['informativo','moderado','alto','muy alto']:['borrador','publicada','cerrada'] as $opt)<option @selected(old($key,$record->$key)==$opt)>{{ $opt }}</option>@endforeach</select>
-@elseif(in_array($key,['body','description','message']))<textarea name="{{ $key }}" required rows="5">{{ old($key,$record->$key) }}</textarea>
-@elseif(in_array($key,['issued_at','expires_at']))<input type="datetime-local" name="{{ $key }}" value="{{ old($key,$record->$key?->format('Y-m-d\TH:i')) }}" required>
-@else<input name="{{ $key }}" type="{{ $key==='source_url'?'url':'text' }}" value="{{ old($key,$record->$key) }}" required>@endif</label>@endforeach<p class="meta">Fechas en horario de Lima. No publiques un aviso vencido. Las fuentes deben usar HTTPS.</p><button>Guardar</button> <a href="/gestion/{{ $kind }}">Cancelar</a></form></section>@endsection

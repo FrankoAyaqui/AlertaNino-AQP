@@ -1,0 +1,14 @@
+{
+  "name": "AlertaNiño AQP",
+  "short_name": "AlertaNiño",
+  "description": "Lluvias, río Chili y Fenómeno El Niño en los distritos de Arequipa.",
+  "lang": "es-PE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f6f3",
+  "theme_color": "#104281",
+  "icons": [
+    { "src": "img/icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

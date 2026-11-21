@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AlertaNiño AQP</title>
+  <meta name="description" content="Monitoreo en tiempo real de lluvias, caudal del río Chili y Fenómeno El Niño para los distritos de Arequipa. Proyecto académico, no reemplaza avisos oficiales.">
+  <meta name="theme-color" content="#104281">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="./" aria-label="AlertaNiño AQP, inicio">
+        <img src="img/icono.svg" alt="" width="36" height="36">
+        <span><strong>AlertaNiño</strong> AQP</span>
+      </a>
+      <div class="estado-conexion" id="estado-conexion" role="status" aria-live="polite">
+        <span class="punto" aria-hidden="true"></span>
+        <span id="estado-texto">Cargando datos…</span>
+      </div>
+      <div class="herramientas" role="group" aria-label="Opciones de lectura">
+        <button type="button" class="btn-icono" id="texto-menos" aria-label="Reducir tamaño de texto">A−</button>
+        <button type="button" class="btn-icono" id="texto-mas" aria-label="Aumentar tamaño de texto">A+</button>
+        <button type="button" class="btn-icono" id="tema" aria-label="Cambiar entre modo claro y oscuro">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="aviso-legal">
+    <div class="contenedor">
+      <strong>Herramienta académica de consulta.</strong> Los niveles se calculan con pronósticos públicos y
+      <em>no son avisos oficiales</em>. Verifica siempre en <a href="https://www.gob.pe/9323-consultar-los-avisos-meteorologicos-mas-recientes-en-peru" target="_blank" rel="noopener">SENAMHI</a>
+      e <a href="https://portal.indeci.gob.pe/" target="_blank" rel="noopener">INDECI</a>.
+      Emergencias: <a href="tel:115">115</a> Defensa Civil · <a href="tel:116">116</a> Bomberos · <a href="tel:105">105</a> Policía · <a href="tel:106">106</a> SAMU.
+    </div>
+  </div>
+
+  <div class="aviso-demo" id="aviso-demo" hidden>
+    <div class="contenedor">
+      <strong>MODO DEMOSTRACIÓN.</strong> La lluvia de mañana y el caudal del río están simulados para mostrar cómo funcionan las alertas.
+      Los índices de El Niño sí son reales. <a href="./">Volver a los datos reales</a>.
+    </div>
+  </div>
+
+  <main id="principal" class="contenedor">
+
+    <!-- 1. Mi distrito -->
+    <section class="bloque" aria-labelledby="t-distrito">
+      <div class="bloque__cabeza">
+        <h1 id="t-distrito">Situación en mi distrito</h1>
+        <label class="selector">
+          <span>Distrito</span>
+          <select id="distrito"></select>
+        </label>
+      </div>
+
+      <article class="tarjeta-estado" id="tarjeta-estado" data-nivel="cargando" aria-live="polite">
+        <div class="tarjeta-estado__nivel">
+          <span class="insignia" id="insignia"><span class="insignia__icono" aria-hidden="true">…</span><span class="insignia__texto">Cargando</span></span>
+          <p class="tarjeta-estado__titulo" id="estado-titulo">Consultando el pronóstico…</p>
+          <p class="tarjeta-estado__detalle" id="estado-detalle"></p>
+        </div>
+        <dl class="cifras" id="cifras"></dl>
+        <div class="tarjeta-estado__acciones">
+          <h2>Qué hacer ahora</h2>
+          <ul id="acciones"></ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- 2. Indicadores -->
+    <section class="bloque" aria-labelledby="t-indicadores">
+      <h2 id="t-indicadores" class="bloque__titulo">Indicadores en vivo</h2>
+      <div class="rejilla-3">
+        <article class="panel" aria-labelledby="t-nino">
+          <h3 id="t-nino">El Niño hoy</h3>
+          <p class="panel__sub">Mar frente a la costa norte del Perú (región Niño 1+2)</p>
+          <div class="heroe">
+            <span class="heroe__valor" id="nino-anom">—</span>
+            <span class="heroe__unidad">°C sobre lo normal</span>
+          </div>
+          <p class="panel__clase" id="nino-clase"></p>
+          <div class="grafico" id="g-nino" role="img" aria-label="Anomalía semanal de temperatura del mar en Niño 1+2"></div>
+          <p class="nota" id="nino-nota"></p>
+        </article>
+
+        <article class="panel" aria-labelledby="t-rio">
+          <h3 id="t-rio">Río Chili</h3>
+          <p class="panel__sub">Caudal modelado a la altura de la ciudad</p>
+          <div class="heroe">
+            <span class="heroe__valor" id="rio-valor">—</span>
+            <span class="heroe__unidad">m³/s hoy</span>
+          </div>
+          <p class="panel__clase" id="rio-clase"></p>
+          <div class="grafico" id="g-rio" role="img" aria-label="Caudal del río Chili, últimos 60 días y pronóstico"></div>
+          <p class="nota" id="rio-nota"></p>
+        </article>
+
+        <article class="panel" aria-labelledby="t-lluvia">
+          <h3 id="t-lluvia">Lluvia próximas 48 h</h3>
+          <p class="panel__sub" id="lluvia-sub">Distrito seleccionado, mm por hora</p>
+          <div class="heroe">
+            <span class="heroe__valor" id="lluvia-total">—</span>
+            <span class="heroe__unidad">mm acumulados</span>
+          </div>
+          <p class="panel__clase" id="lluvia-clase"></p>
+          <div class="grafico" id="g-horas" role="img" aria-label="Lluvia hora a hora en las próximas 48 horas"></div>
+          <p class="nota" id="lluvia-nota"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Mapa y lista -->
+    <section class="bloque" aria-labelledby="t-mapa">
+      <div class="bloque__cabeza">
+        <h2 id="t-mapa" class="bloque__titulo">Mapa de distritos</h2>
+        <div class="leyenda" id="leyenda" aria-label="Leyenda de niveles"></div>
+      </div>
+      <div class="mapa-y-lista">
+        <div id="mapa" class="mapa" aria-label="Mapa de Arequipa con el nivel de cada distrito. La misma información está en la tabla."></div>
+        <div class="tabla-envoltura">
+          <table class="tabla" id="tabla-distritos">
+            <caption>Nivel por distrito (próximas 72 h)</caption>
+            <thead><tr><th scope="col">Distrito</th><th scope="col">Nivel</th><th scope="col" class="num">Lluvia máx. día</th><th scope="col" class="num">Prob.</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="nota">Los puntos marcan una referencia aproximada de cada distrito; no son límites oficiales ni zonas de riesgo. Una zona sin color de alerta no significa «zona segura».</p>
+    </section>
+
+    <!-- 4. Pronóstico 7 días -->
+    <section class="bloque" aria-labelledby="t-semana">
+      <div class="bloque__cabeza">
+        <h2 id="t-semana" class="bloque__titulo">Pronóstico de 7 días · <span id="semana-distrito"></span></h2>
+        <button type="button" class="btn-sec" id="ver-tabla-semana" aria-expanded="false" aria-controls="tabla-semana">Ver como tabla</button>
+      </div>
+      <div class="panel">
+        <div class="grafico grafico--alto" id="g-semana" role="img" aria-label="Lluvia diaria prevista para 7 días con umbrales"></div>
+        <div class="tabla-envoltura" id="tabla-semana" hidden>
+          <table class="tabla">
+            <thead><tr><th scope="col">Día</th><th scope="col">Cielo</th><th scope="col" class="num">Lluvia</th><th scope="col" class="num">Prob.</th><th scope="col" class="num">Temp.</th><th scope="col">Nivel</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Avisos y fuentes oficiales -->
+    <section class="bloque" aria-labelledby="t-avisos">
+      <h2 id="t-avisos" class="bloque__titulo">Avisos oficiales verificados</h2>
+      <div id="avisos" class="avisos"></div>
+      <div class="fuentes">
+        <a class="fuente" href="https://www.gob.pe/9323-consultar-los-avisos-meteorologicos-mas-recientes-en-peru" target="_blank" rel="noopener"><strong>SENAMHI</strong><span>Avisos meteorológicos vigentes</span></a>
+        <a class="fuente" href="https://enfen.imarpe.gob.pe/" target="_blank" rel="noopener"><strong>ENFEN</strong><span>Comunicados oficiales sobre El Niño</span></a>
+        <a class="fuente" href="https://portal.indeci.gob.pe/" target="_blank" rel="noopener"><strong>INDECI · COEN</strong><span>Reportes de emergencias</span></a>
+        <a class="fuente" href="https://sigrid.cenepred.gob.pe/sigridv3/" target="_blank" rel="noopener"><strong>CENEPRED · SIGRID</strong><span>Mapas y escenarios de riesgo</span></a>
+      </div>
+    </section>
+
+    <!-- 6. Alertas en este dispositivo -->
+    <section class="bloque" aria-labelledby="t-mis-alertas">
+      <h2 id="t-mis-alertas" class="bloque__titulo">Alertas en este dispositivo</h2>
+      <div class="panel ajustes">
+        <div class="ajuste">
+          <label class="interruptor"><input type="checkbox" id="opt-notificar"><span>Avisarme cuando suba el nivel de mi distrito</span></label>
+          <p class="nota" id="notif-estado">Funciona mientras esta página esté abierta (puede estar en segundo plano). La web revisa los datos cada 15 minutos.</p>
+        </div>
+        <div class="ajuste">
+          <label class="interruptor"><input type="checkbox" id="opt-sonido"><span>Sonar al recibir un aviso</span></label>
+          <div class="fila-sonido">
+            <label class="selector selector--fila"><span>Tono</span>
+              <select id="tono">
+                <option value="campana">Campana suave</option>
+                <option value="pitido">Pitido intermitente</option>
+                <option value="sirena">Sirena</option>
+              </select>
+            </label>
+            <button type="button" class="btn-sec" id="probar-sonido">Probar sonido</button>
+            <button type="button" class="btn-sec" id="detener-sonido">Detener</button>
+          </div>
+          <p class="nota">El sonido nunca se reproduce solo sin tu permiso. Todo aviso también se muestra en texto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Guías -->
+    <section class="bloque" aria-labelledby="t-guias">
+      <h2 id="t-guias" class="bloque__titulo">Cómo prepararte</h2>
+      <div class="rejilla-3">
+        <details class="guia" open>
+          <summary>Antes de las lluvias</summary>
+          <ul>
+            <li>Ubica las torrenteras y quebradas cercanas a tu casa. No construyas ni acumules desmonte en sus cauces.</li>
+            <li>Limpia techos, canaletas y desagües.</li>
+            <li>Prepara una mochila de emergencia: agua, linterna, radio a pilas, botiquín, documentos en bolsa plástica, abrigo.</li>
+            <li>Acuerda con tu familia un punto de encuentro y un contacto fuera de la ciudad.</li>
+            <li>Pregunta en tu municipalidad por las rutas y zonas seguras oficiales de tu sector.</li>
+          </ul>
+        </details>
+        <details class="guia" open>
+          <summary>Durante una lluvia intensa</summary>
+          <ul>
+            <li>Aléjate de torrenteras, cauces secos y orillas del río Chili: el agua puede bajar de golpe.</li>
+            <li>No cruces calles inundadas a pie ni en vehículo; 30 cm de agua en movimiento pueden arrastrar un auto.</li>
+            <li>Desconecta la electricidad si entra agua a tu vivienda.</li>
+            <li>Sigue las indicaciones de Defensa Civil y la radio local.</li>
+          </ul>
+        </details>
+        <details class="guia" open>
+          <summary>Después</summary>
+          <ul>
+            <li>No regreses a zonas afectadas hasta que las autoridades lo indiquen.</li>
+            <li>Revisa daños en paredes y techos antes de entrar.</li>
+            <li>Consume agua hervida o embotellada.</li>
+            <li>Reporta emergencias al 115 o a tu municipalidad.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- 8. Metodología -->
+    <section class="bloque" aria-labelledby="t-metodo">
+      <h2 id="t-metodo" class="bloque__titulo">Cómo se calcula</h2>
+      <div class="panel metodo" id="metodo"></div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>AlertaNiño AQP</strong> · Proyecto de impacto social, Programación Web, Universidad Continental, Arequipa.</p>
+      <p>Datos: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (CC BY 4.0), GloFAS / Copernicus, <a href="https://www.cpc.ncep.noaa.gov/" target="_blank" rel="noopener">NOAA CPC</a>. Mapa © colaboradores de <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>.</p>
+      <p class="nota" id="pie-generado"></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="alert" hidden></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
