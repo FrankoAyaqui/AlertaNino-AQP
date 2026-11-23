@@ -1,0 +1,62 @@
+<?php
+
+// Mensajes de validación en español para las reglas que usa AlertaNiño AQP.
+return [
+    'accepted' => 'Debes aceptar la :attribute.',
+    'after' => 'La :attribute debe ser posterior a :date.',
+    'before_or_equal' => 'La :attribute no puede ser futura.',
+    'between' => [
+        'numeric' => 'El campo :attribute debe estar entre :min y :max.',
+        'string' => 'El campo :attribute debe tener entre :min y :max caracteres.',
+    ],
+    'boolean' => 'El campo :attribute debe ser verdadero o falso.',
+    'confirmed' => 'La confirmación de :attribute no coincide.',
+    'date' => 'El campo :attribute no es una fecha válida.',
+    'email' => 'El campo :attribute debe ser un correo electrónico válido.',
+    'exists' => 'El :attribute seleccionado no existe.',
+    'in' => 'El valor de :attribute no es válido.',
+    'integer' => 'El campo :attribute debe ser un número entero.',
+    'max' => [
+        'numeric' => 'El campo :attribute no puede ser mayor que :max.',
+        'string' => 'El campo :attribute no puede tener más de :max caracteres.',
+    ],
+    'min' => [
+        'numeric' => 'El campo :attribute debe ser al menos :min.',
+        'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+    ],
+    'numeric' => 'El campo :attribute debe ser un número.',
+    'regex' => 'El formato de :attribute no es válido.',
+    'required' => 'El campo :attribute es obligatorio.',
+    'string' => 'El campo :attribute debe ser texto.',
+    'unique' => 'Ya existe un registro con ese :attribute.',
+    'url' => 'El campo :attribute debe ser una dirección https válida.',
+    'password' => [
+        'letters' => 'La :attribute debe contener al menos una letra.',
+        'mixed' => 'La :attribute debe contener al menos una mayúscula y una minúscula.',
+        'numbers' => 'La :attribute debe contener al menos un número.',
+        'symbols' => 'La :attribute debe contener al menos un símbolo.',
+        'uncompromised' => 'La :attribute apareció en una filtración de datos. Elige otra.',
+    ],
+
+    'attributes' => [
+        'name' => 'nombre',
+        'email' => 'correo electrónico',
+        'password' => 'contraseña',
+        'titulo' => 'título',
+        'mensaje' => 'mensaje',
+        'recomendacion' => 'recomendación',
+        'nivel' => 'nivel',
+        'estado' => 'estado',
+        'fuente' => 'fuente',
+        'tipo' => 'tipo',
+        'categoria' => 'categoría',
+        'contenido' => 'contenido',
+        'orden' => 'orden',
+        'telefono' => 'teléfono',
+        'descripcion' => 'descripción',
+        'provincia' => 'provincia',
+        'latitud' => 'latitud',
+        'longitud' => 'longitud',
+        'rol' => 'rol',
+    ],
+];
