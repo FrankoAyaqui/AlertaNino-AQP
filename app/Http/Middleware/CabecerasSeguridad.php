@@ -31,13 +31,25 @@ class CabecerasSeguridad
             "base-uri 'self'",
             "form-action 'self'",
             "frame-ancestors 'none'",
+            'upgrade-insecure-requests',
         ]);
 
         $respuesta->headers->set('Content-Security-Policy', $csp);
         $respuesta->headers->set('X-Content-Type-Options', 'nosniff');
         $respuesta->headers->set('X-Frame-Options', 'DENY');
         $respuesta->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
-        $respuesta->headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');
+        $respuesta->headers->set('Permissions-Policy', 'geolocation=(), camera=(), microphone=(), payment=(), usb=()');
+        $respuesta->headers->set('Cross-Origin-Opener-Policy', 'same-origin');
+        $respuesta->headers->set('X-Permitted-Cross-Domain-Policies', 'none');
+
+        // HSTS: obliga a HTTPS durante un año en toda conexión segura (OWASP A02/A05).
+        if ($request->isSecure()) {
+            $respuesta->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+        }
+
+        // No revelar el software del servidor.
+        $respuesta->headers->remove('X-Powered-By');
+        $respuesta->headers->remove('Server');
 
         return $respuesta;
     }

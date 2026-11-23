@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\RegistroSeguridad;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ class SesionController extends Controller
 
         // Auth::attempt compara contra el hash bcrypt guardado; nunca contra texto plano.
         if (! Auth::attempt($credenciales, $request->boolean('recordar'))) {
+            // Trazabilidad: queda registrado el intento fallido con su IP.
+            RegistroSeguridad::anota($request, 'advertencia', 'login-fallido', 422);
             throw ValidationException::withMessages(['email' => __('auth.failed')]);
         }
 

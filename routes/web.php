@@ -61,5 +61,6 @@ Route::middleware(['auth', 'can:gestionar-contenido'])->prefix('panel')->name('p
     Route::middleware('can:administrar')->group(function () {
         Route::resource('distritos', DistritoController::class);
         Route::resource('usuarios', UsuarioController::class);
+        Route::get('/seguridad', [PanelController::class, 'seguridad'])->name('seguridad');
     });
 });

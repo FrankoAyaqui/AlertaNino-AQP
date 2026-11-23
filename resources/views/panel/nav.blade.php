@@ -7,5 +7,6 @@
     @can('administrar')
         <a href="{{ route('panel.distritos.index') }}" @if(request()->routeIs('panel.distritos.*')) aria-current="page" @endif>Distritos</a>
         <a href="{{ route('panel.usuarios.index') }}" @if(request()->routeIs('panel.usuarios.*')) aria-current="page" @endif>Usuarios</a>
+        <a href="{{ route('panel.seguridad') }}" @if(request()->routeIs('panel.seguridad')) aria-current="page" @endif>Seguridad</a>
     @endcan
 </nav>
