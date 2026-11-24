@@ -1,0 +1,31 @@
+# Despliegue de un clic en Render. Al conectar el repositorio, Render lee este
+# archivo y crea el servicio web gratuito. Las variables marcadas "sync: false"
+# se escriben en el panel de Render (no quedan en el código).
+services:
+  - type: web
+    name: alertanino-aqp
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: codex/entrega
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: APP_KEY            # clave de cifrado (la generas con: php artisan key:generate --show)
+        sync: false
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL            # la URL que te dé Render, p. ej. https://alertanino-aqp.onrender.com
+        sync: false
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: ADMIN_EMAIL        # tu correo de administrador
+        sync: false
+      - key: ADMIN_PASSWORD     # tu contraseña (12+, mayúscula, minúscula y número)
+        sync: false
+      - key: ADMIN_NOMBRE
+        value: Administrador
+      - key: ALERTA_ESPEJO_URL
+        value: https://frankoayaqui.github.io/AlertaNino-AQP/data/indicadores.json
