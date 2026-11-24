@@ -1,5 +1,5 @@
 # Imagen para desplegar AlertaNiño AQP en Render (gratis, sin tu PC).
-FROM php:8.3-cli
+FROM php:8.4-cli
 
 # Librerías del sistema y extensiones de PHP que necesita Laravel.
 RUN apt-get update && apt-get install -y --no-install-recommends \
